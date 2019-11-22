@@ -1,0 +1,25 @@
+name: companion
+description: The official CodeDay Companion app.
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.2.2 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  provider: ^3.1.0
+  http: ^0.12.0
+  shared_preferences: ^0.5.4
+  cupertino_icons: ^0.1.2
+  url_launcher: ^5.2.5
+  barcode_scan: ^1.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/codeday_logo.png
