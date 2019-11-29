@@ -9,7 +9,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _tabIndex = 0;
+  int _tabIndex = 1;
   PageController _pageController;
 
   @override
@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
         },
         children: <Widget>[
           FeedPage(),
-          Text("sched"),
+          SchedulePage(),
           Text("checkin"),
         ],
       ),
@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
           });
           _pageController.animateToPage(
             index,
-            duration: Duration(milliseconds: 400),
+            duration: Duration(milliseconds: 200),
             curve: Curves.easeOut,
           );
         },
@@ -70,6 +70,81 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class SchedulePage extends StatefulWidget {
+  @override
+  _SchedulePageState createState() => _SchedulePageState();
+}
+
+class _SchedulePageState extends State<SchedulePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<UserModel>(
+      builder: (context, user, child) {
+        if (!user.loggedIn) {
+          return Container();
+        }
+        List<Widget> items = [];
+        for (String day in user.event.schedule.keys) {
+          items.add(
+            Padding(
+              padding: EdgeInsets.fromLTRB(8, 16, 8, 8),
+              child: Row(
+                children: <Widget>[
+                  Text(day),
+                  Expanded(child: Divider()),
+                ],
+              ),
+            ),
+          );
+          for (var card in user.event.schedule[day]) {
+            items.add(
+              Card(
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      width: 10,
+                      height: 60,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    Container(
+                      child: Center(
+                        child: Text(card.hour),
+                      ),
+                      width: 60,
+                    ),
+                    Container(
+                      width: 1,
+                      height: 10,
+                      color: Colors.grey[900],
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(15),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(card.title),
+                          if (card.description != null)
+                            Padding(
+                              padding: EdgeInsets.only(top: 10),
+                              child: Text(card.description),
+                            ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }
+        }
+        return ListView(
+          children: items,
+        );
+      },
     );
   }
 }

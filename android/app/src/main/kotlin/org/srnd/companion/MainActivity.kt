@@ -1,4 +1,4 @@
-package org.srnd.companion
+package org.srnd.companion2
 
 import android.os.Bundle
 
