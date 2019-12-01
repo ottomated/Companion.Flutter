@@ -16,6 +16,8 @@ dependencies:
   cupertino_icons: ^0.1.2
   url_launcher: ^5.2.5
   barcode_scan: ^1.0.0
+  qr_flutter: ^3.1.0
+  flutter_particles: ^1.0.0
   flutter_test:
     sdk: flutter
 

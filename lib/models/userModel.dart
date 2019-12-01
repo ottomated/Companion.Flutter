@@ -161,6 +161,7 @@ class ScheduleEntry {
   String description;
   String hour;
   String day;
+  String url;
 
   ScheduleEntry({
     this.relativeTime,
@@ -170,6 +171,7 @@ class ScheduleEntry {
     this.description,
     this.day,
     this.hour,
+    this.url,
   });
   factory ScheduleEntry.fromJson(Map<String, dynamic> json) {
     return ScheduleEntry(
@@ -180,6 +182,7 @@ class ScheduleEntry {
       description: json['description'],
       day: json['day'],
       hour: json['hour'],
+      url: json['url'],
     );
   }
 }
