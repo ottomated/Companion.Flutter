@@ -1,3 +1,4 @@
+import 'package:companion/main.dart';
 import 'package:companion/models/userModel.dart';
 import 'package:companion/routes/home.dart';
 import 'package:flutter/material.dart';

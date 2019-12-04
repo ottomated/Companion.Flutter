@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 
 import 'models/userModel.dart';
 import 'routes/login.dart';
 import 'routes/home.dart';
 
+
+FlutterLocalNotificationsPlugin notifications;
+
 void main() {
-  runApp(ChangeNotifierProvider(
-      builder: (context) => UserModel(), child: CodedayApp()));
+  notifications = new FlutterLocalNotificationsPlugin();
+  runApp(
+    ChangeNotifierProvider(
+      builder: (context) => UserModel(),
+      child: CodedayApp(),
+    ),
+  );
 }
 
 class CodedayApp extends StatelessWidget {

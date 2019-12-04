@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../main.dart';
 import '../models/userModel.dart';
 
 class SchedulePage extends StatefulWidget {
@@ -46,14 +48,37 @@ class _SchedulePageState extends State<SchedulePage> {
 
 class ScheduleCard extends StatelessWidget {
   final ScheduleEntry card;
+
   ScheduleCard(this.card);
+
   @override
   Widget build(BuildContext context) {
     return Card(
       child: IntrinsicHeight(
         child: InkWell(
-          onTap: card.url == null ? null : () {
-            launch(card.url);
+          onTap: card.url == null
+              ? null
+              : () {
+                  launch(card.url);
+                },
+          onLongPress: () async {
+            var scheduledNotificationDateTime =
+                new DateTime.now().add(new Duration(seconds: 5));
+            var androidPlatformChannelSpecifics =
+                new AndroidNotificationDetails(
+                    'your other channel id',
+                    'your other channel name',
+                    'your other channel description');
+            var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
+            NotificationDetails platformChannelSpecifics =
+                new NotificationDetails(androidPlatformChannelSpecifics,
+                    iOSPlatformChannelSpecifics);
+            await notifications.schedule(
+                0,
+                'scheduled title',
+                'scheduled body',
+                scheduledNotificationDateTime,
+                platformChannelSpecifics);
           },
           child: Row(
             children: <Widget>[
